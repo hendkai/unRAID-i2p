@@ -11,7 +11,36 @@
   <Project>https://geti2p.net/</Project>
   <Overview>I2P (Invisible Internet Project) is an anonymous network layer that allows for censorship-resistant, peer-to-peer communication. Access .i2p websites, communicate anonymously, and browse the hidden internet through this decentralized network.&#xD;
 &#xD;
-After installation, access the router console at http://:7657 to configure your router. Configure your browser to use HTTP proxy :4444 for browsing .i2p sites. Allow 15-30 minutes for the router to integrate into the I2P network.</Overview>
+SETUP:&#xD;
+After installation, access the router console at http://[IP]:7657 to configure your router. Allow 15-30 minutes for the router to integrate into the I2P network.&#xD;
+&#xD;
+BROWSER ACCESS:&#xD;
+Configure your browser to use HTTP proxy [IP]:4444 for browsing .i2p sites and HTTPS proxy [IP]:4445 for secure connections.&#xD;
+&#xD;
+SSH TUNNELING (Advanced):&#xD;
+To securely access I2P from remote computers via SSH tunnel:&#xD;
+&#xD;
+1. Create SSH tunnel to your Unraid server:&#xD;
+   ssh -L 7657:localhost:7657 -L 4444:localhost:4444 -L 4445:localhost:4445 user@[UNRAID-IP]&#xD;
+&#xD;
+2. Configure your browser to use these local proxies:&#xD;
+   - HTTP Proxy: 127.0.0.1:4444&#xD;
+   - HTTPS Proxy: 127.0.0.1:4445&#xD;
+   - Router Console: http://127.0.0.1:7657&#xD;
+&#xD;
+3. For persistent tunnels, add to ~/.ssh/config:&#xD;
+   Host unraid-i2p&#xD;
+     HostName [UNRAID-IP]&#xD;
+     User [USERNAME]&#xD;
+     LocalForward 7657 localhost:7657&#xD;
+     LocalForward 4444 localhost:4444&#xD;
+     LocalForward 4445 localhost:4445&#xD;
+     &#xD;
+   Then connect with: ssh unraid-i2p&#xD;
+&#xD;
+This allows secure access to your I2P router from anywhere while keeping all traffic encrypted through SSH.&#xD;
+&#xD;
+SECURITY NOTE: Only expose I2P ports locally. Never expose these ports directly to the internet.</Overview>
   <Category/>
   <WebUI>http://[IP]:[PORT:7657]/</WebUI>
   <TemplateURL/>
@@ -19,15 +48,21 @@ After installation, access the router console at http://:7657 to configure your 
   <ExtraParams>--restart=unless-stopped</ExtraParams>
   <PostArgs/>
   <CPUset/>
-  <DateInstalled>1750404977</DateInstalled>
+  <DateInstalled>1750405722</DateInstalled>
   <DonateText/>
   <DonateLink/>
-  <Requires/>
+  <Requires>SSH TUNNELING SETUP:&#xD;
+For secure remote access, create SSH tunnels to your Unraid server:&#xD;
+ssh -L 7657:localhost:7657 -L 4444:localhost:4444 -L 4445:localhost:4445 user@[UNRAID-IP]&#xD;
+&#xD;
+Then configure browser proxies to use 127.0.0.1:4444 (HTTP) and 127.0.0.1:4445 (HTTPS).&#xD;
+Never expose I2P ports directly to the internet - always use SSH tunneling for remote access.</Requires>
   <Config Name="Router Console" Target="7657" Default="7657" Mode="tcp" Description="Port for I2P Router Console web interface. Access your router configuration, monitoring, and tunnel management at http://[IP]:7657" Type="Port" Display="always" Required="true" Mask="false">7657</Config>
   <Config Name="HTTP Proxy" Target="4444" Default="4444" Mode="tcp" Description="HTTP proxy port for browsing .i2p websites. Configure your browser to use [IP]:4444 as HTTP proxy to access hidden I2P sites" Type="Port" Display="always" Required="true" Mask="false">4444</Config>
   <Config Name="HTTPS Proxy" Target="4445" Default="4445" Mode="tcp" Description="HTTPS proxy port for secure I2P browsing. Configure your browser to use [IP]:4445 as HTTPS proxy for encrypted .i2p site access" Type="Port" Display="always" Required="true" Mask="false">4445</Config>
   <Config Name="IRC Proxy" Target="6668" Default="6668" Mode="tcp" Description="IRC proxy for accessing I2P IRC networks. Configure your IRC client to connect through [IP]:6668 to reach Irc2P servers" Type="Port" Display="always" Required="false" Mask="false">6668</Config>
   <Config Name="I2P Data" Target="/i2p/.i2p" Default="/mnt/user/appdata/i2p" Mode="rw" Description="Persistent storage for I2P configuration, router info, tunnel settings, and application data" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/i2p</Config>
-  <Config Name="I2PSnark Downloads" Target="/i2p/i2psnark" Default="/mnt/user/downloads/i2p" Mode="rw" Description="Download directory for I2PSnark torrents. Change this path to your preferred download location" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/downloads/i2p</Config>
+  <Config Name="I2PSnark Downloads" Target="/i2p/i2psnark" Default="/mnt/user/downloads/i2p" Mode="rw" Description="Download directory for I2PSnark torrents. Change this path to your preferred download location" Type="Path" Display="always" Required="false" Mask="false">/mnt/four_tb_drives/Downloads/i2p</Config>
   <Config Name="Monotone Proxy" Target="8998" Default="8998" Mode="tcp" Description="Monotone proxy port for distributed version control over I2P. Used for secure code repository access through the I2P network" Type="Port" Display="advanced" Required="false" Mask="false">8998</Config>
+  <TailscaleStateDir/>
 </Container>
