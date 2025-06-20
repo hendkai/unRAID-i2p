@@ -1,30 +1,33 @@
 <?xml version="1.0"?>
 <Container version="2">
-  <n>i2p</n>
+  <Name>i2p</Name>
   <Repository>geti2p/i2p</Repository>
   <Registry>https://hub.docker.com/r/geti2p/i2p</Registry>
   <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
   <Privileged>false</Privileged>
-  <Support>https://forums.unraid.net/topic/XXXXXX-support-i2p/</Support>
+  <Support/>
   <Project>https://geti2p.net/</Project>
   <Overview>I2P (Invisible Internet Project) is an anonymous network layer that allows for censorship-resistant, peer-to-peer communication. Access .i2p websites, communicate anonymously, and browse the hidden internet through this decentralized network.&#xD;
 &#xD;
-After installation, access the router console at http://[IP]:7657 to configure your router. Configure your browser to use HTTP proxy [IP]:4444 for browsing .i2p sites. Allow 15-30 minutes for the router to integrate into the I2P network.</Overview>
-  <Category>Network:Privacy Network:Other Tools:Utilities</Category>
+After installation, access the router console at http://:7657 to configure your router. Configure your browser to use HTTP proxy :4444 for browsing .i2p sites. Allow 15-30 minutes for the router to integrate into the I2P network.</Overview>
+  <Category/>
   <WebUI>http://[IP]:[PORT:7657]/</WebUI>
-  <TemplateURL>https://raw.githubusercontent.com/selfhosters/unRAID-CA-templates/master/templates/i2p.xml</TemplateURL>
+  <TemplateURL/>
   <Icon>https://raw.githubusercontent.com/i2p/i2p.i2p/master/installer/resources/i2plogo.png</Icon>
   <ExtraParams>--restart=unless-stopped</ExtraParams>
-  <DonateText>Support I2P Development</DonateText>
-  <DonateLink>https://geti2p.net/en/get-involved/donate</DonateLink>
-  <Config Name="Router Console" Target="7657" Default="7657" Mode="tcp" Description="Port for I2P Router Console web interface" Type="Port" Display="always" Required="true" Mask="false">7657</Config>
-  <Config Name="HTTP Proxy" Target="4444" Default="4444" Mode="tcp" Description="HTTP proxy port for browsing .i2p websites" Type="Port" Display="always" Required="true" Mask="false">4444</Config>
-  <Config Name="HTTPS Proxy" Target="4445" Default="4445" Mode="tcp" Description="HTTPS proxy port for secure .i2p browsing" Type="Port" Display="always" Required="true" Mask="false">4445</Config>
-  <Config Name="IRC Proxy" Target="6668" Default="6668" Mode="tcp" Description="IRC proxy for I2P IRC networks" Type="Port" Display="advanced" Required="false" Mask="false">6668</Config>
-  <Config Name="Monotone Proxy" Target="8998" Default="8998" Mode="tcp" Description="Monotone proxy port for distributed version control" Type="Port" Display="advanced" Required="false" Mask="false">8998</Config>
-  <Config Name="I2P Data" Target="/i2p/.i2p" Default="/mnt/user/appdata/i2p" Mode="rw" Description="Persistent storage for I2P configuration, router info, and tunnel settings" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/i2p</Config>
-  <Config Name="JVM Max Memory" Target="JVM_XMX" Default="512m" Mode="" Description="Maximum JVM heap size (increase for high-traffic routers: 1g for heavy usage)" Type="Variable" Display="always" Required="false" Mask="false">512m</Config>
-  <Config Name="JVM Initial Memory" Target="JVM_XMS" Default="256m" Mode="" Description="Initial JVM heap size" Type="Variable" Display="advanced" Required="false" Mask="false">256m</Config>
-  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="User ID for file permissions" Type="Variable" Display="advanced" Required="false" Mask="false">99</Config>
-  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Group ID for file permissions" Type="Variable" Display="advanced" Required="false" Mask="false">100</Config>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1750404977</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Requires/>
+  <Config Name="Router Console" Target="7657" Default="7657" Mode="tcp" Description="Port for I2P Router Console web interface. Access your router configuration, monitoring, and tunnel management at http://[IP]:7657" Type="Port" Display="always" Required="true" Mask="false">7657</Config>
+  <Config Name="HTTP Proxy" Target="4444" Default="4444" Mode="tcp" Description="HTTP proxy port for browsing .i2p websites. Configure your browser to use [IP]:4444 as HTTP proxy to access hidden I2P sites" Type="Port" Display="always" Required="true" Mask="false">4444</Config>
+  <Config Name="HTTPS Proxy" Target="4445" Default="4445" Mode="tcp" Description="HTTPS proxy port for secure I2P browsing. Configure your browser to use [IP]:4445 as HTTPS proxy for encrypted .i2p site access" Type="Port" Display="always" Required="true" Mask="false">4445</Config>
+  <Config Name="IRC Proxy" Target="6668" Default="6668" Mode="tcp" Description="IRC proxy for accessing I2P IRC networks. Configure your IRC client to connect through [IP]:6668 to reach Irc2P servers" Type="Port" Display="always" Required="false" Mask="false">6668</Config>
+  <Config Name="I2P Data" Target="/i2p/.i2p" Default="/mnt/user/appdata/i2p" Mode="rw" Description="Persistent storage for I2P configuration, router info, tunnel settings, and application data" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/i2p</Config>
+  <Config Name="I2PSnark Downloads" Target="/i2p/i2psnark" Default="/mnt/user/downloads/i2p" Mode="rw" Description="Download directory for I2PSnark torrents. Change this path to your preferred download location" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/downloads/i2p</Config>
+  <Config Name="Monotone Proxy" Target="8998" Default="8998" Mode="tcp" Description="Monotone proxy port for distributed version control over I2P. Used for secure code repository access through the I2P network" Type="Port" Display="advanced" Required="false" Mask="false">8998</Config>
 </Container>
